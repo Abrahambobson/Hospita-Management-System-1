@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Hospital Management System</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <style>
+        .faq-item {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background-color: var(--light-bg);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background-color: rgba(0, 123, 255, 0.05);
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+            color: var(--light-text);
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .search-box {
+            margin-bottom: 2rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">🏥 Hospital Management</div>
+            <ul class="navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/pages/public/about.html">About</a></li>
+                <li><a href="/pages/public/departments.html">Departments</a></li>
+                <li><a href="/pages/public/health-tips.html">Health Tips</a></li>
+                <li><a href="/pages/public/faq.html" class="active">FAQ</a></li>
+                <li><a href="/pages/public/careers.html">Careers</a></li>
+            </ul>
+            <div class="navbar-right">
+                <a href="/pages/public/login.html" class="btn btn-outline btn-sm">Login</a>
+                <button class="navbar-toggle">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section
+        style="background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%); color: white; padding: 3rem 1rem; text-align: center;">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p style="color: rgba(255, 255, 255, 0.9);">Find answers to common questions about our services</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 3rem 1rem;">
+        <div class="search-box">
+            <input type="text" id="faqSearch" placeholder="Search FAQs..." class="form-control">
+        </div>
+
+        <div id="faqContainer">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I book an appointment?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    You can book an appointment by logging into your patient portal and navigating to the appointments
+                    section. Select your preferred doctor, date, and time, then confirm your booking. You can also call
+                    our reception desk at +1 (555) 123-4567 to book over the phone.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What should I bring for my first visit?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Please bring a valid ID, insurance card, and any medical records from previous treatments. If you
+                    have any prescription documents or test reports, please bring those as well. Fill out our new
+                    patient form 15 minutes before your appointment.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I reschedule or cancel my appointment?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, you can reschedule or cancel your appointment through your patient portal or by contacting our
+                    reception desk. Please provide at least 24 hours notice for cancellations. Cancellations made within
+                    24 hours may incur a fee.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What are your visiting hours?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Our visiting hours are Monday-Friday: 8 AM - 8 PM, Saturday: 9 AM - 6 PM, and Sunday: 10 AM - 4 PM.
+                    ICU and emergency wards have restricted visiting hours. Please check with the reception desk for
+                    specific departmental hours.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How can I access my health records?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Your complete health records are available in your patient portal 24/7. Log in with your credentials
+                    to view your medical history, test results, prescriptions, and doctor's notes. You can also request
+                    printed copies from our medical records department.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you accept insurance?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, we accept most major insurance providers. Please verify your coverage with your insurance
+                    company before your visit. Our billing department can also help confirm your coverage. We also offer
+                    flexible payment plans for uninsured patients.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What is your emergency protocol?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    In case of emergency, call 911 or come directly to our emergency room. Our emergency team is
+                    available 24/7 to provide immediate care. You can also use the emergency contact feature in your
+                    patient portal to alert our medical staff.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I request a prescription refill?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    You can request prescription refills through your patient portal, by calling your doctor's office,
+                    or by visiting the pharmacy counter. Most refills are processed within 24-48 hours. For urgent
+                    needs, contact our pharmacy directly.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How is my personal health information protected?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    We comply fully with HIPAA regulations and use advanced encryption to protect your data. Your health
+                    information is stored securely and only accessible to authorized healthcare providers involved in
+                    your care. We never share your information without your consent.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you offer telemedicine/virtual appointments?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, we offer telemedicine services for follow-up consultations and non-emergency appointments.
+                    Select "Virtual Appointment" when booking through our patient portal. You'll receive a video call
+                    link before your appointment time.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/pages/public/about.html">About</a></li>
+                        <li><a href="/pages/public/careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📞 +1 (555) 123-4567</li>
+                        <li>📧 info@hospital.com</li>
+                        <li>📍 123 Medical Center Dr</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hours</h4>
+                    <ul>
+                        <li>Monday - Friday: 8 AM - 6 PM</li>
+                        <li>Saturday: 9 AM - 2 PM</li>
+                        <li>Emergency: 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hospital Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/chatbot.js"></script>
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function () {
+                const item = this.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // FAQ search
+        document.getElementById('faqSearch')?.addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

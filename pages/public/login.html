@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Hospital Management System</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .auth-container {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 450px;
+            width: 100%;
+            padding: 2.5rem;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: var(--light-text);
+        }
+
+        .auth-form {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-footer {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .auth-footer p {
+            margin-bottom: 0;
+            color: var(--light-text);
+        }
+
+        .auth-footer a {
+            font-weight: 600;
+        }
+
+        .demo-account {
+            background-color: var(--light-bg);
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .demo-account h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .demo-account p {
+            margin: 0.25rem 0;
+        }
+
+        .role-selector {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .role-option input {
+            margin-right: 0.5rem;
+        }
+
+        .role-option label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>🏥 Hospital System</h1>
+            <p>Welcome back! Please login to your account</p>
+        </div>
+
+        <div id="alertContainer"></div>
+
+        <form id="loginForm" class="auth-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" required placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required
+                    placeholder="Enter your password">
+            </div>
+
+            <div class="form-group">
+                <label>Login As:</label>
+                <div class="role-selector">
+                    <div class="role-option">
+                        <input type="radio" id="patient" name="role" value="patient" checked>
+                        <label for="patient">Patient</label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="doctor" name="role" value="doctor">
+                        <label for="doctor">Doctor</label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="admin" name="role" value="admin">
+                        <label for="admin">Admin</label>
+                    </div>
+                    <div class="role-option">
+                        <input type="radio" id="staff" name="role" value="staff">
+                        <label for="staff">Staff</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Don't have an account? <a href="/pages/public/signup.html">Sign up here</a></p>
+            <p><a href="#">Forgot password?</a></p>
+        </div>
+
+        <div class="demo-account">
+            <h4>Demo Credentials:</h4>
+            <p><strong>Patient:</strong> patient@example.com / password</p>
+            <p><strong>Doctor:</strong> doctor@example.com / password</p>
+            <p><strong>Admin:</strong> admin@example.com / password</p>
+        </div>
+    </div>
+
+    <div id="mainLoader" class="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/auth.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/chatbot.js"></script>
+</body>
+
+</html>

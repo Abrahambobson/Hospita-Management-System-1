@@ -1,0 +1,61 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for XDebug",
+            "type": "php",
+            "port": 9003,
+            "pathMapping": {
+                "/": "${workspaceFolder}/"
+            },
+            "log": true
+        },
+        {
+            "name": "Launch PHP Server",
+            "type": "php",
+            "request": "launch",
+            "program": "${workspaceFolder}/index.html",
+            "cwd": "${workspaceFolder}",
+            "port": 9003,
+            "runtimeExecutable": "php",
+            "runtimeArgs": [
+                "-S",
+                "localhost:8000"
+            ],
+            "serverReadyAction": {
+                "pattern": "Development Server \\(http://localhost:\\d+\\) started",
+                "uriFormat": "http://localhost:%s",
+                "action": "openExternally"
+            }
+        },
+        {
+            "name": "Chrome - Open Hospital Management",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:8000",
+            "webRoot": "${workspaceFolder}",
+            "sourceMapPathOverride": {
+                "${workspaceFolder}/*": "*"
+            }
+        },
+        {
+            "name": "Node: Run API Tests",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/api/test.js",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "cwd": "${workspaceFolder}"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "PHP Server + Browser",
+            "configurations": [
+                "Launch PHP Server",
+                "Chrome - Open Hospital Management"
+            ]
+        }
+    ]
+}

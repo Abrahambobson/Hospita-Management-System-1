@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System - Quality Healthcare Services</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <style>
+        .hero {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero .btn {
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+        }
+
+        .hero .btn-secondary {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .features-section {
+            padding: 4rem 2rem;
+            background-color: var(--light-bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--light-text);
+            margin-bottom: 0;
+        }
+
+        .services-section {
+            padding: 4rem 2rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-item {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .service-item:hover {
+            transform: scale(1.05);
+        }
+
+        .service-item h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonials-section {
+            padding: 4rem 2rem;
+            background-color: var(--light-bg);
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #007BFF 0%, #28A745 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="mainLoader" class="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Alerts -->
+    <div id="alertContainer"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                🏥 Hospital Management
+            </div>
+            <ul class="navbar-nav">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/pages/public/about.html">About</a></li>
+                <li><a href="/pages/public/departments.html">Departments</a></li>
+                <li><a href="/pages/public/health-tips.html">Health Tips</a></li>
+                <li><a href="/pages/public/faq.html">FAQ</a></li>
+                <li><a href="/pages/public/careers.html">Careers</a></li>
+            </ul>
+            <div class="navbar-right">
+                <a href="/pages/public/login.html" class="btn btn-outline btn-sm">Login</a>
+                <a href="/pages/public/signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+                <button class="navbar-toggle">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Our Hospital Management System</h1>
+            <p>Providing comprehensive healthcare management solutions with a focus on patient care and operational
+                excellence.</p>
+            <div class="hero-buttons">
+                <a href="/pages/patient/dashboard.html" class="btn btn-primary">Patient Portal</a>
+                <a href="/pages/doctor/dashboard.html" class="btn btn-secondary">Doctor Portal</a>
+                <a href="/pages/public/about.html" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Our Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>Patient Management</h3>
+                    <p>Easy access to patient information and health records with secure storage.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Appointment Booking</h3>
+                    <p>Seamless scheduling with doctors using our intuitive booking system.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3>Department Management</h3>
+                    <p>Organized departments with dedicated staff and services.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Health Records</h3>
+                    <p>Secure digital health records accessible to authorized providers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💊</div>
+                    <h3>Inventory Management</h3>
+                    <p>Track medical supplies and equipment efficiently.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍⚕️</div>
+                    <h3>Staff Management</h3>
+                    <p>Comprehensive staff records and scheduling system.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h4>Emergency Care</h4>
+                    <p>24/7 emergency services</p>
+                </div>
+                <div class="service-item">
+                    <h4>General Surgery</h4>
+                    <p>Expert surgical procedures</p>
+                </div>
+                <div class="service-item">
+                    <h4>Cardiology</h4>
+                    <p>Heart and vascular care</p>
+                </div>
+                <div class="service-item">
+                    <h4>Pediatrics</h4>
+                    <p>Child healthcare services</p>
+                </div>
+                <div class="service-item">
+                    <h4>Neurology</h4>
+                    <p>Brain and nerve care</p>
+                </div>
+                <div class="service-item">
+                    <h4>Orthopedics</h4>
+                    <p>Bone and joint treatment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">>
+                    <p>Patients Served</p>
+                </div>
+                <div>
+                    <div class="stat">200+</div>
+                    <p>Medical Staff</p>
+                </div>
+                <div>
+                    <div class="stat">30+</div>
+                    <p>Departments</p>
+                </div>
+                <div>
+                    <div class="stat">99.9%</div>
+                    <p>Uptime</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">What Our Patients Say</h2>
+            <div class="row">
+                <div class="col-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">"The hospital management system made my appointments and health
+                            records easily accessible. Highly recommended!"</div>
+                        <div class="testimonial-author">- John Smith</div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">"Professional staff and excellent care. The digital system is very
+                            user-friendly."</div>
+                        <div class="testimonial-author">- Sarah Johnson</div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">"Quick appointment booking and responsive support. Great
+                            experience overall!"</div>
+                        <div class="testimonial-author">- Michael Chen</div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Experience Better Healthcare?</h2>
+            <p>Join thousands of patients who trust our hospital management system</p>
+            <a href="/pages/public/signup.html" class="btn btn-primary btn-lg">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="/pages/public/about.html">About Hospital</a></li>
+                        <li><a href="/pages/public/privacy.html">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/pages/public/departments.html">Departments</a></li>
+                        <li><a href="#">Book Appointment</a></li>
+                        <li><a href="/pages/public/health-tips.html">Health Tips</a></li>
+                        <li><a href="#">Emergency Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/pages/public/faq.html">FAQ</a></li>
+                        <li><a href="/pages/public/careers.html">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📞 +232 77502443</li>
+                        <li>📧 info@hospital.com</li>
+                        <li>📍 123 Medical Center Dr, Lungi, Port Loko</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hospital Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/auth.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/chatbot.js"></script>
+</body>
+

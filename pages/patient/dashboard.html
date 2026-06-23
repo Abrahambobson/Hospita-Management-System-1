@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - Hospital Management System</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <style>
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 0;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            padding: 2rem;
+            background-color: var(--light-bg);
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-button {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .action-button:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-button h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .appointments-table {
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .appointment-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .appointment-row:hover {
+            background-color: var(--light-bg);
+        }
+
+        .upcoming-badge {
+            background-color: rgba(40, 167, 69, 0.15);
+            color: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .past-badge {
+            background-color: rgba(108, 117, 125, 0.15);
+            color: var(--neutral-color);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .appointment-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Check authentication -->
+    <script>
+        if (!auth?.isAuthenticated() || auth?.getCurrentUser()?.role !== 'patient') {
+            window.location.href = '/pages/public/login.html';
+        }
+    </script>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                🏥 Patient Portal
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="/pages/patient/dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="/pages/patient/health-records.html">Health Records</a></li>
+                <li><a href="/pages/patient/patient-history.html">Medical History</a></li>
+                <li><a href="/pages/patient/book-appointment.html">Book Appointment</a></li>
+                <li><a href="/pages/patient/emergency-contacts.html">Emergency Contacts</a></li>
+                <li><a href="/pages/patient/subscriptions.html">Subscriptions</a></li>
+                <li><a href="/pages/patient/profile.html">My Profile</a></li>
+                <li><a href="#" onclick="auth.logout()">Logout</a></li>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h1>Welcome, <span id="patientName">Patient</span>!</h1>
+                <div style="text-align: right;">
+                    <button class="btn btn-outline btn-sm" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+
+            <!-- Alert Container -->
+            <div id="alertContainer"></div>
+
+            <!-- Quick Stats -->
+            <div class="row" style="margin-bottom: 3rem;">
+                <div class="col-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="upcomingCount">0</div>
+                        <div class="stat-label">Upcoming Appointments</div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="recordsCount">0</div>
+                        <div class="stat-label">Health Records</div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="doctorsCount">0</div>
+                        <div class="stat-label">Associated Doctors</div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="stat-card">
+                        <div class="stat-number" id="subscriptionStatus">Active</div>
+                        <div class="stat-label">Subscription</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <h2 style="margin-bottom: 1.5rem;">Quick Actions</h2>
+            <div class="quick-actions">
+                <a href="/pages/patient/book-appointment.html" class="action-button">
+                    <h4>📅</h4>
+                    <p>Book Appointment</p>
+                </a>
+                <a href="/pages/patient/health-records.html" class="action-button">
+                    <h4>📋</h4>
+                    <p>View Records</p>
+                </a>
+                <a href="/pages/patient/emergency-contacts.html" class="action-button">
+                    <h4>🚨</h4>
+                    <p>Emergency Info</p>
+                </a>
+                <a href="/pages/patient/subscriptions.html" class="action-button">
+                    <h4>💳</h4>
+                    <p>Subscription</p>
+                </a>
+            </div>
+
+            <!-- Upcoming Appointments -->
+            <h2 style="margin-bottom: 1.5rem; margin-top: 3rem;">Upcoming Appointments</h2>
+            <div class="appointments-table">
+                <div class="appointment-row"
+                    style="background-color: var(--light-bg); font-weight: 600; border-bottom: 2px solid var(--border-color);">
+                    <div>Doctor</div>
+                    <div>Department</div>
+                    <div>Date & Time</div>
+                    <div>Status</div>
+                    <div>Action</div>
+                </div>
+                <div id="appointmentsContainer" style="padding: 1rem; text-align: center; color: var(--light-text);">
+                    Loading appointments...
+                </div>
+            </div>
+
+            <!-- Recent Health Records -->
+            <h2 style="margin-bottom: 1.5rem; margin-top: 3rem;">Recent Health Records</h2>
+            <div class="appointments-table">
+                <div class="appointment-row"
+                    style="background-color: var(--light-bg); font-weight: 600; border-bottom: 2px solid var(--border-color);">
+                    <div>Test Type</div>
+                    <div>Date</div>
+                    <div>Status</div>
+                    <div>Doctor</div>
+                    <div>Action</div>
+                </div>
+                <div id="healthRecordsContainer" style="padding: 1rem; text-align: center; color: var(--light-text);">
+                    Loading health records...
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <h2 style="margin-bottom: 1.5rem; margin-top: 3rem;">Recent Notifications</h2>
+            <div id="notificationsContainer"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                <div class="card">
+                    <div class="card-body">
+                        <p style="color: var(--light-text); margin: 0;">No new notifications</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="mainLoader" class="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/auth.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/chatbot.js"></script>
+    <script>
+        // Load patient dashboard data
+        async function loadDashboard() {
+            const user = auth.getCurrentUser();
+            if (user) {
+                document.getElementById('patientName').textContent = user.name;
+            }
+
+            try {
+                app.showLoader();
+
+                // Load dashboard stats
+                const stats = await api.getPatientStats();
+                if (stats.success) {
+                    document.getElementById('upcomingCount').textContent = stats.upcomingAppointments || 0;
+                    document.getElementById('recordsCount').textContent = stats.healthRecords || 0;
+                    document.getElementById('doctorsCount').textContent = stats.associatedDoctors || 0;
+                }
+
+                // Load appointments
+                const appointments = await api.getAppointments({ patientId: user.id, status: 'upcoming' });
+                if (appointments.success && appointments.appointments.length > 0) {
+                    document.getElementById('appointmentsContainer').innerHTML = appointments.appointments
+                        .map(apt => `
+                            <div class="appointment-row">
+                                <div><strong>${apt.doctorName}</strong></div>
+                                <div>${apt.department}</div>
+                                <div>${app.formatDateTime(apt.appointmentDate)}</div>
+                                <div><span class="upcoming-badge">${apt.status}</span></div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline" onclick="cancelAppointment(${apt.id})">Cancel</button>
+                                </div>
+                            </div>
+                        `).join('');
+                } else {
+                    document.getElementById('appointmentsContainer').innerHTML = `
+                        <div style="padding: 2rem; text-align: center; color: var(--light-text);">
+                            No upcoming appointments. <a href="/pages/patient/book-appointment.html">Book one now</a>
+                        </div>
+                    `;
+                }
+
+                // Load health records
+                const records = await api.getHealthRecords(user.id);
+                if (records.success && records.healthRecords.length > 0) {
+                    document.getElementById('healthRecordsContainer').innerHTML = records.healthRecords
+                        .slice(0, 5)
+                        .map(record => `
+                            <div class="appointment-row">
+                                <div><strong>${record.testType}</strong></div>
+                                <div>${app.formatDate(record.testDate)}</div>
+                                <div><span class="badge badge-success">${record.status}</span></div>
+                                <div>${record.doctorName}</div>
+                                <div>
+                                    <button class="btn btn-sm btn-primary" onclick="viewRecord(${record.id})">View</button>
+                                </div>
+                            </div>
+                        `).join('');
+                } else {
+                    document.getElementById('healthRecordsContainer').innerHTML = `
+                        <div style="padding: 2rem; text-align: center; color: var(--light-text);">
+                            No health records available yet
+                        </div>
+                    `;
+                }
+
+                app.hideLoader();
+            } catch (error) {
+                app.hideLoader();
+                app.showAlert('Error loading dashboard data', 'danger');
+                console.error('Dashboard error:', error);
+            }
+        }
+
+        async function cancelAppointment(appointmentId) {
+            if (confirm('Are you sure you want to cancel this appointment?')) {
+                try {
+                    const result = await api.cancelAppointment(appointmentId);
+                    if (result.success) {
+                        app.showAlert('Appointment cancelled successfully', 'success');
+                        setTimeout(() => location.reload(), 1500);
+                    } else {
+                        app.showAlert(result.message || 'Error cancelling appointment', 'danger');
+                    }
+                } catch (error) {
+                    app.showAlert('Error cancelling appointment', 'danger');
+                }
+            }
+        }
+
+        function viewRecord(recordId) {
+            window.location.href = `/pages/patient/health-records.html?record=${recordId}`;
+        }
+
+        // Load dashboard on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            auth.requireAuth(['patient']);
+            loadDashboard();
+        });
+    </script>
+</body>
+
+</html>

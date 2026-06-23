@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Hospital Management System</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .auth-container {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 100%;
+            padding: 2.5rem;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-header p {
+            color: var(--light-text);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .password-strength {
+            height: 4px;
+            background-color: var(--border-color);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            background-color: var(--danger-color);
+            transition: var(--transition);
+        }
+
+        .strength-weak {
+            width: 33%;
+            background-color: var(--danger-color);
+        }
+
+        .strength-medium {
+            width: 66%;
+            background-color: var(--accent-color);
+        }
+
+        .strength-strong {
+            width: 100%;
+            background-color: var(--secondary-color);
+        }
+
+        .auth-footer {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .auth-footer a {
+            font-weight: 600;
+        }
+
+        .terms-check {
+            font-size: 0.85rem;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .terms-check a {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>🏥 Create Account</h1>
+            <p>Join our hospital management system today</p>
+        </div>
+
+        <div id="alertContainer"></div>
+
+        <form id="registerForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" required placeholder="John">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" required placeholder="Smith">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" required placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="+1 (555) 000-0000">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required
+                    placeholder="At least 8 characters">
+                <div class="password-strength">
+                    <div class="password-strength-bar" id="strengthBar"></div>
+                </div>
+                <small id="strengthText"
+                    style="color: var(--light-text); margin-top: 0.25rem; display: block;">Weak</small>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required
+                    placeholder="Re-enter password">
+            </div>
+
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth</label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" class="form-control" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" class="form-control" placeholder="Enter your full address"
+                    style="min-height: 80px;"></textarea>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" id="agree" name="agree" required>
+                <label for="agree">I agree to the Terms of Service and Privacy Policy</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a href="/pages/public/login.html">Login here</a></p>
+        </div>
+    </div>
+
+    <div id="mainLoader" class="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/auth.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/chatbot.js"></script>
+    <script>
+        // Password strength indicator
+        document.getElementById('password')?.addEventListener('input', function () {
+            const password = this.value;
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+
+            if (password.length < 6) {
+                strengthBar.className = 'password-strength-bar strength-weak';
+                strengthText.textContent = 'Weak';
+            } else if (password.length < 10) {
+                strengthBar.className = 'password-strength-bar strength-medium';
+                strengthText.textContent = 'Medium';
+            } else if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+                strengthBar.className = 'password-strength-bar strength-strong';
+                strengthText.textContent = 'Strong';
+            } else {
+                strengthBar.className = 'password-strength-bar strength-medium';
+                strengthText.textContent = 'Medium';
+            }
+        });
+
+        // Form validation
+        document.getElementById('registerForm')?.addEventListener('submit', function (e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                app.showAlert('Passwords do not match', 'danger');
+                return;
+            }
+
+            if (password.length < 8) {
+                e.preventDefault();
+                app.showAlert('Password must be at least 8 characters', 'danger');
+                return;
+            }
+        });
+    </script>
+</body>
+
+</html>

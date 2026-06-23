@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Hospital Management System</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">🏥 Hospital Management</div>
+            <ul class="navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/pages/public/about.html">About</a></li>
+                <li><a href="/pages/public/departments.html">Departments</a></li>
+                <li><a href="/pages/public/health-tips.html">Health Tips</a></li>
+                <li><a href="/pages/public/faq.html">FAQ</a></li>
+                <li><a href="/pages/public/careers.html" class="active">Careers</a></li>
+            </ul>
+            <div class="navbar-right">
+                <a href="/pages/public/login.html" class="btn btn-outline btn-sm">Login</a>
+                <button class="navbar-toggle">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section
+        style="background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%); color: white; padding: 3rem 1rem; text-align: center;">
+        <div class="container">
+            <h1>Join Our Team</h1>
+            <p style="color: rgba(255, 255, 255, 0.9);">Build a rewarding career in healthcare</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 3rem 1rem;">
+        <section style="background-color: var(--light-bg); padding: 2rem; border-radius: 0.5rem; margin-bottom: 3rem;">
+            <h2>Why Work With Us?</h2>
+            <div class="row">
+                <div class="col-3">
+                    <h4>💼 Professional Growth</h4>
+                    <p>Continuous training and development opportunities for career advancement</p>
+                </div>
+                <div class="col-3">
+                    <h4>🏥 Modern Facilities</h4>
+                    <p>Work with cutting-edge medical equipment and latest technology</p>
+                </div>
+                <div class="col-3">
+                    <h4>👥 Supportive Team</h4>
+                    <p>Collaborative work environment with dedicated professionals</p>
+                </div>
+                <div class="col-3">
+                    <h4>💰 Competitive Benefits</h4>
+                    <p>Attractive salary, insurance, and retirement benefits</p>
+                </div>
+            </div>
+        </section>
+
+        <h2 style="margin-bottom: 2rem;">Current Openings</h2>
+
+        <div class="row" id="jobListings">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="margin: 0;">Senior Cardiologist</h4>
+                            <span class="badge badge-primary">Full-time</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Department:</strong> Cardiology</p>
+                        <p><strong>Experience:</strong> 10+ years</p>
+                        <p><strong>Description:</strong> We are seeking an experienced Cardiologist to lead our
+                            cardiology department. The ideal candidate will have a strong background in cardiac surgery
+                            and patient care.</p>
+                        <p><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>MD or equivalent qualification</li>
+                            <li>Board certification in Cardiology</li>
+                            <li>10+ years of clinical experience</li>
+                            <li>Strong leadership skills</li>
+                        </ul>
+                        <button class="btn btn-primary btn-sm" onclick="applyForJob(1, 'Senior Cardiologist')">Apply
+                            Now</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="margin: 0;">Registered Nurse</h4>
+                            <span class="badge badge-secondary">Multiple Positions</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Department:</strong> Various</p>
+                        <p><strong>Experience:</strong> 2+ years</p>
+                        <p><strong>Description:</strong> Join our nursing team and provide quality patient care across
+                            multiple departments. We offer flexible schedules and career growth opportunities.</p>
+                        <p><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>Bachelor's degree in Nursing</li>
+                            <li>Valid nursing license</li>
+                            <li>2+ years of nursing experience</li>
+                            <li>Excellent communication skills</li>
+                        </ul>
+                        <button class="btn btn-primary btn-sm" onclick="applyForJob(2, 'Registered Nurse')">Apply
+                            Now</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="margin: 0;">Medical Laboratory Technician</h4>
+                            <span class="badge badge-success">Available</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Department:</strong> Laboratory</p>
+                        <p><strong>Experience:</strong> 1+ years</p>
+                        <p><strong>Description:</strong> Support our laboratory operations by analyzing patient samples
+                            and maintaining testing equipment.</p>
+                        <p><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>Diploma or Bachelor's in Medical Lab Technology</li>
+                            <li>1+ years of experience</li>
+                            <li>Knowledge of lab safety protocols</li>
+                            <li>Attention to detail</li>
+                        </ul>
+                        <button class="btn btn-primary btn-sm"
+                            onclick="applyForJob(3, 'Medical Laboratory Technician')">Apply Now</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="margin: 0;">Administrative Officer</h4>
+                            <span class="badge badge-success">Available</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Department:</strong> Administration</p>
+                        <p><strong>Experience:</strong> 3+ years</p>
+                        <p><strong>Description:</strong> Support hospital administrative operations including
+                            scheduling, records management, and patient coordination.</p>
+                        <p><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>Bachelor's degree</li>
+                            <li>3+ years of administrative experience</li>
+                            <li>Proficiency in MS Office</li>
+                            <li>Strong organizational skills</li>
+                        </ul>
+                        <button class="btn btn-primary btn-sm" onclick="applyForJob(4, 'Administrative Officer')">Apply
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Application Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Apply for Position</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="alertContainer"></div>
+                <form id="applicationForm">
+                    <input type="hidden" id="jobId" name="jobId">
+
+                    <div class="form-group">
+                        <label for="applicantName">Full Name</label>
+                        <input type="text" id="applicantName" name="applicantName" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="applicantEmail">Email Address</label>
+                        <input type="email" id="applicantEmail" name="applicantEmail" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="applicantPhone">Phone Number</label>
+                        <input type="tel" id="applicantPhone" name="applicantPhone" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="applicantCoverLetter">Cover Letter</label>
+                        <textarea id="applicantCoverLetter" name="applicantCoverLetter" class="form-control"
+                            required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resumeFile">Upload Resume (PDF)</label>
+                        <input type="file" id="resumeFile" name="resumeFile" accept=".pdf,.doc,.docx"
+                            class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/pages/public/about.html">About</a></li>
+                        <li><a href="/pages/public/privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>HR Contact</h4>
+                    <ul>
+                        <li>📞 +1 (555) 123-4567 ext. 500</li>
+                        <li>📧 hr@hospital.com</li>
+                        <li>📍 HR Department, Building A</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hospital Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/chatbot.js"></script>
+    <script>
+        function applyForJob(jobId, jobTitle) {
+            document.getElementById('jobId').value = jobId;
+            const modal = document.getElementById('applicationModal');
+            modal.classList.add('show');
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('applicationModal');
+            modal.classList.remove('show');
+            modal.style.display = 'none';
+        }
+
+        document.getElementById('applicationForm')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            app.showAlert('Application submitted successfully! We will contact you soon.', 'success');
+            closeModal();
+            this.reset();
+        });
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('applicationModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+
+</html>
